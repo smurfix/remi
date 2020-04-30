@@ -30,9 +30,6 @@ from .server import runtimeInstances
 
 log = logging.getLogger('remi.gui')
 
-pyLessThan3 = sys.version_info < (3,)
-
-
 def to_pix(x):
     return str(x) + 'px'
 
@@ -66,10 +63,7 @@ def load_resource(filename):
     with open(filename, 'rb') as f:
         data = f.read()
     data = base64.b64encode(data)
-    if pyLessThan3:
-        data = data.encode('utf-8')
-    else:
-        data = str(data, 'utf-8')
+    data = str(data, 'utf-8')
     return "data:%(mime)s;base64,%(data)s"%{'mime':mimetype, 'data':data}
 
 
@@ -331,8 +325,6 @@ class Tag(object):
                 ret = ret + s.repr(local_changed_widgets)
             elif isinstance(s, type('')):
                 ret = ret + s
-            elif isinstance(s, type(u'')):
-                ret = ret + s.encode('utf-8')
             else:
                 ret = ret + repr(s)
         return ret
@@ -2545,7 +2537,7 @@ class ListView(Container):
             key (str): The unique string identifier for the child. Ignored in case of iterable 'value'
                 param.
         """
-        if isinstance(value, type('')) or isinstance(value, type(u'')):
+        if isinstance(value, str):
             value = ListItem(value)
 
         keys = super(ListView, self).append(value, key=key)
@@ -2705,7 +2697,7 @@ class DropDown(Container):
         return obj
 
     def append(self, value, key=''):
-        if isinstance(value, type('')) or isinstance(value, type(u'')):
+        if isinstance(value, str):
             value = DropDownItem(value)
         keys = super(DropDown, self).append(value, key=key)
         if len(self.children) == 1:
@@ -3074,7 +3066,7 @@ class TableRow(Container):
         self.style['float'] = 'none'
 
     def append(self, value, key=''):
-        if isinstance(value, type('')) or isinstance(value, type(u'')):
+        if isinstance(value, str):
             value = TableItem(value)
         keys = super(TableRow, self).append(value, key)
         if type(value) in (list, tuple, dict):
@@ -3618,9 +3610,6 @@ class FileFolderNavigator(Container):
                     return (1 if a > b else -1)
 
         log.debug("FileFolderNavigator - populate_folder_items")
-
-        if pyLessThan3:
-            directory = directory.decode('utf-8')
 
         l = os.listdir(directory)
         l.sort(key=functools.cmp_to_key(_sort_files))

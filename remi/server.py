@@ -50,9 +50,6 @@ def gzip_encode(content):
 clients = {}
 runtimeInstances = weakref.WeakValueDictionary()
 
-pyLessThan3 = sys.version_info < (3,)
-
-
 _MSG_ACK = '3'
 _MSG_JS = '2'
 _MSG_UPDATE = '1'
@@ -60,22 +57,16 @@ _MSG_UPDATE = '1'
 
 def to_websocket(data):
     # encoding end decoding utility function
-    if pyLessThan3:
-        return quote(data)
     return quote(data, encoding='utf-8')
 
 
 def from_websocket(data):
     # encoding end decoding utility function
-    if pyLessThan3:
-        return unquote(data)
     return unquote(data, encoding='utf-8')
 
 
 def encode_text(data):
-    if not pyLessThan3:
-        return data.encode('utf-8')
-    return data
+    return data.encode('utf-8')
 
 
 def get_method_by_name(root_node, name):
@@ -135,12 +126,6 @@ class WebSocketsHandler(socketserver.StreamRequestHandler):
                     self._log.debug('ws ending websocket service')
                     break
 
-    @staticmethod
-    def bytetonum(b):
-        if pyLessThan3:
-            b = ord(b)
-        return b
-
     def read_next_message(self):
         # noinspection PyBroadException
         try:
@@ -149,15 +134,15 @@ class WebSocketsHandler(socketserver.StreamRequestHandler):
             except ValueError:
                 # socket was closed, just return without errors
                 return False
-            length = self.bytetonum(length[1]) & 127
+            length = length[1] & 127
             if length == 126:
                 length = struct.unpack('>H', self.rfile.read(2))[0]
             elif length == 127:
                 length = struct.unpack('>Q', self.rfile.read(8))[0]
-            masks = [self.bytetonum(byte) for byte in self.rfile.read(4)]
+            masks = [byte for byte in self.rfile.read(4)]
             decoded = ''
             for char in self.rfile.read(length):
-                decoded += chr(self.bytetonum(char) ^ masks[len(decoded) % 4])
+                decoded += chr(char ^ masks[len(decoded) % 4])
             self.on_message(from_websocket(decoded))
         except socket.timeout:
             return False
@@ -182,8 +167,7 @@ class WebSocketsHandler(socketserver.StreamRequestHandler):
         else:
             out.append(127)
             out += struct.pack('>Q', length)
-        if not pyLessThan3:
-            message = message.encode('utf-8')
+        message = message.encode('utf-8')
         out = out + message
         self.request.send(out)
 
