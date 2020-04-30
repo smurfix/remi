@@ -14,14 +14,8 @@
    limitations under the License.
 """
 import logging
-try:
-    from http.server import HTTPServer, BaseHTTPRequestHandler
-except ImportError:
-    from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
-try:
-    import socketserver
-except ImportError:
-    import SocketServer as socketserver
+from http.server import HTTPServer, BaseHTTPRequestHandler
+import socketserver
 import socket
 import ssl
 
@@ -37,17 +31,11 @@ import signal
 import time
 import os
 import re
-try:
-    from urllib import unquote
-    from urllib import quote
-    from urlparse import urlparse
-    from urlparse import parse_qs
-except ImportError:
-    from urllib.parse import unquote
-    from urllib.parse import quote
-    from urllib.parse import unquote_to_bytes
-    from urllib.parse import urlparse
-    from urllib.parse import parse_qs
+from urllib.parse import unquote
+from urllib.parse import quote
+from urllib.parse import unquote_to_bytes
+from urllib.parse import urlparse
+from urllib.parse import parse_qs
 import cgi
 import weakref
 

@@ -16,32 +16,14 @@ import os
 import sys
 import logging
 import functools
-import threading
 import collections
 import inspect
-try:
-    import html
-    escape = html.escape
-except ImportError:
-    import cgi
-    escape = cgi.escape
+import html
+escape = html.escape
 import mimetypes
 import base64
-try:
-    # Python 2.6-2.7
-    from HTMLParser import HTMLParser
-    h = HTMLParser()
-    unescape = h.unescape
-except ImportError:
-    # Python 3
-    try:
-        from html.parser import HTMLParser
-        h = HTMLParser()
-        unescape = h.unescape
-    except ImportError:
-        # Python 3.4+
-        import html
-        unescape = html.unescape
+import html
+unescape = html.unescape
 
 from .server import runtimeInstances
 
