@@ -920,31 +920,31 @@ class Widget(Tag, EventSource):
         return super(Widget, self).repr(changed_widgets)
 
     @decorate_set_on_listener("(self, emitter)")
-    @decorate_event_js("sendCallback('%(emitter_identifier)s','%(event_name)s');")
+    @decorate_event_js("remi.sendCallback('%(emitter_identifier)s','%(event_name)s');")
     def onfocus(self):
         """Called when the Widget gets focus."""
         return ()
 
     @decorate_set_on_listener("(self, emitter)")
-    @decorate_event_js("sendCallback('%(emitter_identifier)s','%(event_name)s');")
+    @decorate_event_js("remi.sendCallback('%(emitter_identifier)s','%(event_name)s');")
     def onblur(self):
         """Called when the Widget loses focus"""
         return ()
 
     @decorate_set_on_listener("(self, emitter)")
-    @decorate_event_js("sendCallback('%(emitter_identifier)s','%(event_name)s');")
+    @decorate_event_js("remi.sendCallback('%(emitter_identifier)s','%(event_name)s');")
     def onclick(self):
         """Called when the Widget gets clicked by the user with the left mouse button."""
         return ()
 
     @decorate_set_on_listener("(self, emitter)")
-    @decorate_event_js("sendCallback('%(emitter_identifier)s','%(event_name)s');")
+    @decorate_event_js("remi.sendCallback('%(emitter_identifier)s','%(event_name)s');")
     def ondblclick(self):
         """Called when the Widget gets double clicked by the user with the left mouse button."""
         return ()
 
     @decorate_set_on_listener("(self, emitter)")
-    @decorate_event_js("sendCallback('%(emitter_identifier)s','%(event_name)s');")
+    @decorate_event_js("remi.sendCallback('%(emitter_identifier)s','%(event_name)s');")
     def oncontextmenu(self):
         """Called when the Widget gets clicked by the user with the right mouse button.
         """
@@ -955,7 +955,7 @@ class Widget(Tag, EventSource):
             "var boundingBox = this.getBoundingClientRect();" \
             "params['x']=event.clientX-boundingBox.left;" \
             "params['y']=event.clientY-boundingBox.top;" \
-            "sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);")
+            "remi.sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);")
     def onmousedown(self, x, y):
         """Called when the user presses left or right mouse button over a Widget.
 
@@ -970,7 +970,7 @@ class Widget(Tag, EventSource):
             "var boundingBox = this.getBoundingClientRect();" \
             "params['x']=event.clientX-boundingBox.left;" \
             "params['y']=event.clientY-boundingBox.top;" \
-            "sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);")
+            "remi.sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);")
     def onmouseup(self, x, y):
         """Called when the user releases left or right mouse button over a Widget.
 
@@ -981,7 +981,7 @@ class Widget(Tag, EventSource):
         return (x, y)
 
     @decorate_set_on_listener("(self, emitter)")
-    @decorate_event_js("sendCallback('%(emitter_identifier)s','%(event_name)s');")
+    @decorate_event_js("remi.sendCallback('%(emitter_identifier)s','%(event_name)s');")
     def onmouseout(self):
         """Called when the mouse cursor moves outside a Widget.
 
@@ -991,7 +991,7 @@ class Widget(Tag, EventSource):
         return ()
 
     @decorate_set_on_listener("(self, emitter)")
-    @decorate_event_js("sendCallback('%(emitter_identifier)s','%(event_name)s');")
+    @decorate_event_js("remi.sendCallback('%(emitter_identifier)s','%(event_name)s');")
     def onmouseover(self):
         """Called when the mouse cursor moves onto a Widget.
 
@@ -1000,7 +1000,7 @@ class Widget(Tag, EventSource):
         return ()
 
     @decorate_set_on_listener("(self, emitter)")
-    @decorate_event_js("sendCallback('%(emitter_identifier)s','%(event_name)s');")
+    @decorate_event_js("remi.sendCallback('%(emitter_identifier)s','%(event_name)s');")
     def onmouseleave(self):
         """Called when the mouse cursor moves outside a Widget.
 
@@ -1017,7 +1017,7 @@ class Widget(Tag, EventSource):
             "var boundingBox = this.getBoundingClientRect();" \
             "params['x']=event.clientX-boundingBox.left;" \
             "params['y']=event.clientY-boundingBox.top;" \
-            "sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);")
+            "remi.sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);")
     def onmousemove(self, x, y):
         """Called when the mouse cursor moves inside the Widget.
 
@@ -1032,7 +1032,7 @@ class Widget(Tag, EventSource):
             "var boundingBox = this.getBoundingClientRect();" \
             "params['x']=parseInt(event.changedTouches[0].clientX)-boundingBox.left;" \
             "params['y']=parseInt(event.changedTouches[0].clientY)-boundingBox.top;" \
-            "sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);")
+            "remi.sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);")
     def ontouchmove(self, x, y):
         """Called continuously while a finger is dragged across the screen, over a Widget.
 
@@ -1047,7 +1047,7 @@ class Widget(Tag, EventSource):
             "var boundingBox = this.getBoundingClientRect();" \
             "params['x']=parseInt(event.changedTouches[0].clientX)-boundingBox.left;" \
             "params['y']=parseInt(event.changedTouches[0].clientY)-boundingBox.top;" \
-            "sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);")
+            "remi.sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);")
     def ontouchstart(self, x, y):
         """Called when a finger touches the widget.
 
@@ -1062,7 +1062,7 @@ class Widget(Tag, EventSource):
             "var boundingBox = this.getBoundingClientRect();" \
             "params['x']=parseInt(event.changedTouches[0].clientX)-boundingBox.left;" \
             "params['y']=parseInt(event.changedTouches[0].clientY)-boundingBox.top;" \
-            "sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);")
+            "remi.sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);")
     def ontouchend(self, x, y):
         """Called when a finger is released from the widget.
 
@@ -1077,7 +1077,7 @@ class Widget(Tag, EventSource):
             "var boundingBox = this.getBoundingClientRect();" \
             "params['x']=parseInt(event.changedTouches[0].clientX)-boundingBox.left;" \
             "params['y']=parseInt(event.changedTouches[0].clientY)-boundingBox.top;" \
-            "sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);")
+            "remi.sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);")
     def ontouchenter(self, x, y):
         """Called when a finger touches from outside to inside the widget.
 
@@ -1088,14 +1088,14 @@ class Widget(Tag, EventSource):
         return (x, y)
 
     @decorate_set_on_listener("(self, emitter)")
-    @decorate_event_js("sendCallback('%(emitter_identifier)s','%(event_name)s');")
+    @decorate_event_js("remi.sendCallback('%(emitter_identifier)s','%(event_name)s');")
     def ontouchleave(self):
         """Called when a finger touches from inside to outside the widget.
         """
         return ()
 
     @decorate_set_on_listener("(self, emitter)")
-    @decorate_event_js("sendCallback('%(emitter_identifier)s','%(event_name)s');")
+    @decorate_event_js("remi.sendCallback('%(emitter_identifier)s','%(event_name)s');")
     def ontouchcancel(self):
         """Called when a touch point has been disrupted in an implementation-specific manner
         (for example, too many touch points are created).
@@ -1346,14 +1346,16 @@ class HEAD(Tag):
         self.add_child('internal_js',
                 """
                 <script>
-                // from http://stackoverflow.com/questions/5515869/string-length-in-bytes-in-javascript
-                // using UTF8 strings I noticed that the javascript .length of a string returned less
-                // characters than they actually were
+                remi = (function() {
+
                 var pendingSendMessages = [];
                 var ws = null;
                 var comTimeout = null;
                 var failedConnections = 0;
 
+                // from http://stackoverflow.com/questions/5515869/string-length-in-bytes-in-javascript
+                // using UTF8 strings I noticed that the javascript .length of a string returned less
+                // characters than they actually were
                 function byteLength(str) {
                     // returns the byte length of an utf8 string
                     var s = str.length;
@@ -1590,6 +1592,7 @@ class HEAD(Tag):
                     fd.append('upload_file', file);
                     xhr.send(fd);
                 };
+                })();
                 </script>""" % {'host':net_interface_ip,
                                 'max_pending_messages':pending_messages_queue_length,
                                 'messaging_timeout':websocket_timeout_timer_ms})
@@ -1632,7 +1635,7 @@ class BODY(Container):
         self.append(loading_container)
 
     @decorate_set_on_listener("(self, emitter)")
-    @decorate_event_js("""sendCallback('%(emitter_identifier)s','%(event_name)s');""")
+    @decorate_event_js("""remi.sendCallback('%(emitter_identifier)s','%(event_name)s');""")
     def onload(self):
         """Called when page gets loaded."""
         return ()
@@ -1650,12 +1653,12 @@ class BODY(Container):
         return (message, source, lineno, colno)
 
     @decorate_set_on_listener("(self, emitter)")
-    @decorate_event_js("""sendCallback('%(emitter_identifier)s','%(event_name)s');""")
+    @decorate_event_js("""remi.sendCallback('%(emitter_identifier)s','%(event_name)s');""")
     def ononline(self):
         return ()
 
     @decorate_set_on_listener("(self, emitter)")
-    @decorate_event_js("""sendCallback('%(emitter_identifier)s','%(event_name)s');""")
+    @decorate_event_js("""remi.sendCallback('%(emitter_identifier)s','%(event_name)s');""")
     def onpagehide(self):
         return ()
 
@@ -2166,7 +2169,7 @@ class TextInput(Widget, _MixinTextualWidget):
 
         self.attributes[Widget.EVENT_ONCHANGE] = \
             "var params={};params['new_value']=document.getElementById('%(emitter_identifier)s').value;" \
-            "sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);"% \
+            "remi.sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);"% \
             {'emitter_identifier': str(self.identifier), 'event_name': Widget.EVENT_ONCHANGE}
 
     def set_value(self, text):
@@ -2672,7 +2675,7 @@ class DropDown(Container):
         self.type = 'select'
         self.attributes[self.EVENT_ONCHANGE] = \
             "var params={};params['value']=document.getElementById('%(id)s').value;" \
-            "sendCallbackParam('%(id)s','%(evt)s',params);" % {'id': self.identifier,
+            "remi.sendCallbackParam('%(id)s','%(evt)s',params);" % {'id': self.identifier,
                                                                'evt': self.EVENT_ONCHANGE}
         self._selected_item = None
         self._selected_key = None
@@ -3163,7 +3166,7 @@ class Input(Widget):
         self.attributes['autocomplete'] = 'off'
         self.attributes[Widget.EVENT_ONCHANGE] = \
             "var params={};params['value']=document.getElementById('%(emitter_identifier)s').value;" \
-            "sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);"% \
+            "remi.sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);"% \
         {'emitter_identifier':str(self.identifier), 'event_name':Widget.EVENT_ONCHANGE}
 
     def set_value(self, value):
@@ -3253,7 +3256,7 @@ class CheckBox(Input):
         self.set_value(checked)
         self.attributes[Widget.EVENT_ONCHANGE] = \
             "var params={};params['value']=document.getElementById('%(emitter_identifier)s').checked;" \
-            "sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);"% \
+            "remi.sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);"% \
             {'emitter_identifier':str(self.identifier), 'event_name':Widget.EVENT_ONCHANGE}
 
     @decorate_set_on_listener("(self, emitter, value)")
@@ -3332,7 +3335,7 @@ class SpinBox(Input):
         self.attributes[self.EVENT_ONKEYUP] = \
             "var key = event.keyCode || event.charCode;" \
             "if(key==13){var params={};params['value']=document.getElementById('%(id)s').value;" \
-            "sendCallbackParam('%(id)s','%(evt)s',params); return true;}" \
+            "remi.sendCallbackParam('%(id)s','%(evt)s',params); return true;}" \
             "return false;" % {'id': self.identifier, 'evt': self.EVENT_ONCHANGE}
 
 
@@ -3378,7 +3381,7 @@ class Slider(Input):
         self.attributes['step'] = str(step)
         self.attributes[Widget.EVENT_ONCHANGE] = \
             "var params={};params['value']=document.getElementById('%(emitter_identifier)s').value;" \
-            "sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);"% \
+            "remi.sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);"% \
             {'emitter_identifier':str(self.identifier), 'event_name':Widget.EVENT_ONCHANGE}
 
     @decorate_set_on_listener("(self, emitter, value)")
@@ -3494,7 +3497,7 @@ class SelectionInput(Input):
         
         self.attributes[Widget.EVENT_ONCHANGE] = \
             "var params={};params['value']=document.getElementById('%(emitter_identifier)s').value;" \
-            "sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);"% \
+            "remi.sendCallbackParam('%(emitter_identifier)s','%(event_name)s',params);"% \
             {'emitter_identifier':str(self.identifier), 'event_name':Widget.EVENT_ONCHANGE}
 
     @decorate_set_on_listener("(self, emitter, x, y)")
@@ -3861,7 +3864,7 @@ class TreeItem(Container, _MixinTextualWidget):
         return self.sub_container.append(value, key=key)
 
     @decorate_set_on_listener("(self, emitter)")
-    @decorate_event_js("sendCallback('%(emitter_identifier)s','%(event_name)s');")
+    @decorate_event_js("remi.sendCallback('%(emitter_identifier)s','%(event_name)s');")
     def onclick(self):
         self.treeopen = not self.treeopen
         if self.treeopen:
@@ -4044,7 +4047,7 @@ class VideoPlayer(Widget):
             self.attributes.pop('loop', None)
 
     @decorate_set_on_listener("(self, emitter)")
-    @decorate_event_js("sendCallback('%(emitter_identifier)s','%(event_name)s');")
+    @decorate_event_js("remi.sendCallback('%(emitter_identifier)s','%(event_name)s');")
     def onended(self):
         """Called when the media has been played and reached the end."""
         return ()
