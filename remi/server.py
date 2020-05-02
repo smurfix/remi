@@ -69,13 +69,6 @@ def encode_text(data):
     return data.encode('utf-8')
 
 
-def get_method_by_name(root_node, name):
-    val = None
-    if hasattr(root_node, name):
-        val = getattr(root_node, name)
-    return val
-
-
 def get_method_by_id(_id):
     global runtimeInstances
     return runtimeInstances.get(str(_id), None)
@@ -228,7 +221,7 @@ class WebSocketsHandler(socketserver.StreamRequestHandler):
 
                         param_dict = parse_parametrs(params)
 
-                        callback = get_method_by_name(runtimeInstances[widget_id], function_name)
+                        callback = getattr(runtimeInstances[widget_id], function_name, None)
                         if callback is not None:
                             callback(**param_dict)
 
@@ -503,7 +496,7 @@ class App(BaseHTTPRequestHandler, object):
                     file_data = field_item.file.read()
                     file_len = len(file_data)
                     self._log.debug('post: uploaded %s as "%s" (%d bytes)\n' % (field, field_item.filename, file_len))
-                    get_method_by_name(listener_widget, listener_function)(file_data, filename)
+                    getattr(listener_widget, listener_function)(file_data, filename)
                 else:
                     # Regular form value
                     self._log.debug('post: %s=%s\n' % (field, form[field].value))
@@ -629,7 +622,7 @@ class App(BaseHTTPRequestHandler, object):
 
                 widget, func = attr_call.group(1, 2)
                 try:
-                    content, headers = get_method_by_name(get_method_by_id(widget), func)(**param_dict)
+                    content, headers = getattr(get_method_by_id(widget), func)(**param_dict)
                     if content is None:
                         self.send_response(503)
                         return
