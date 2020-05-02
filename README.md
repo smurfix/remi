@@ -398,7 +398,7 @@ This way the standard *style.css* file gets overridden by the one you created.
 
 Compatibility
 ===
-Remi is made to be compatible from Python2.7 to Python3.X. Please notify compatibility issues.
+Remi is compatible with Python3.4 or newer. Please notify compatibility issues.
 
 
 Security
