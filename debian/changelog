@@ -1,4 +1,10 @@
-remi (2020.5.00-1) smurf; urgency=low
+remi (2020.03.10.smurf1-1) unstable; urgency=medium
+
+  * Merge
+
+ -- Matthias Urlichs <matthias@urlichs.de>  Fri, 08 May 2020 20:23:44 +0200
+
+remi (2020.03.00-1) smurf; urgency=low
 
   * source package automatically created by stdeb 0.8.5
 
