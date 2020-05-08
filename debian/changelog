@@ -1,3 +1,9 @@
+remi (2020.03.10.smurf1-2) unstable; urgency=medium
+
+  * Drop testing
+
+ -- Matthias Urlichs <matthias@urlichs.de>  Fri, 08 May 2020 20:25:38 +0200
+
 remi (2020.03.10.smurf1-1) unstable; urgency=medium
 
   * Merge
